@@ -8,7 +8,6 @@ class gw2ch {
     "vim",
     "curl",
     "tmux",
-    "git",
     "nginx",
     "varnish",
     "php5",
@@ -22,7 +21,7 @@ class gw2ch {
     "redis-server",
     "memcached",
     "mysql-server",
-	"python-setuptools"
+    "mysql-workbench"
   ]
 
   package {
@@ -39,8 +38,7 @@ class gw2ch {
 
   exec { "setup-project-database":
     #command => "mysqladmin -uroot -p$password create gw2spidy; mysql -uroot -p$password gw2ch < config/schema.sql",
-	command => "mysqladmin -uroot -p$password create gw2ch;",
-    cwd => "/vagrant",
+    command => "mysqladmin -uroot -p$password create gw2ch;",
     require => Exec["mysql root password"]
   }
 

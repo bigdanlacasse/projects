@@ -5,7 +5,7 @@
 	define('INCLUDES_PATH', dirname(__FILE__) . '/../includes');
 	define('WEB_ROOT', dirname(__FILE__));
 	
-	require INCLUDES_PATH . '/sdk/predis/autoload.php';
+	require INCLUDES_PATH . '/libraries/predis/autoload.php';
 	
 	
 	
@@ -15,7 +15,7 @@
   </head>
   <body> 
 	<div>
-    <? 
+    <?php 
 		// since we connect to default setting localhost
 		// and 6379 port there is no need for extra
 		// configuration. If not then you can specify the

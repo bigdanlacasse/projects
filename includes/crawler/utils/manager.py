@@ -1,23 +1,26 @@
 """
-
+    Class which contains storage of queues and threads. Used to start work
 """
 import time
 import threading
-from storage import WorkQueue
-from api_wrapper import GW2
+from threads import workerThread
+from queing import WorkQueue
 
 class Manager (object):
-    def __init__(self, num_t = 5):
+    def __init__(self, num_t = 5, q_size=50000):
         self.num_threads = num_t
         self.start_time = 0
         self.end_time = 0
         self.exitFlag = 0
         self.threads = []
         self.queueLock = threading.Lock()
-        self.work_queue = WorkQueue()
+        self.work_queue = WorkQueue(q_size)
         # Notify threads it's time to exit
         self.exitFlag = 0
     
+    """
+        Main function to begin working
+    """
     def go (self):
         self.start_time = time.time()
         self.fillQueue()
@@ -46,7 +49,7 @@ class Manager (object):
         print 'Threads have joined'
             
     """
-    
+        Start the requested number of threads (of each variety)
     """    
     def start_threads(self):
         for x in range(0, self.num_threads):
@@ -55,7 +58,7 @@ class Manager (object):
             self.threads.append(thread)
         
     """
-    
+        Call the work queue's fill method to populate the list of items we need to work on
     """
     def fillQueue(self):
         # Fill the queue
@@ -63,39 +66,3 @@ class Manager (object):
         self.work_queue.fill()
         print 'Initial Queue size: ' + str(self.work_queue.queue.qsize())
         self.queueLock.release()
-    
-
-"""
-
-"""
-class workerThread (threading.Thread):
-    def __init__(self, threadID, q, mutex, exit):
-        threading.Thread.__init__(self)
-        self.threadID = threadID
-        self.name = 'Thread-' + str(self.threadID)
-        self.q = q
-        self.mutex = mutex
-        self.exit = exit
-        self.API = GW2()
-        
-        print self.exit
-
-    def run(self):
-        print "Starting " + self.name
-        self.process_data()
-        print "Exiting " + self.name
-        
-    def process_data(self):
-        while not self.exit:
-            self.mutex.acquire()
-            if not self.q.empty():
-                item = self.q.get()
-                self.mutex.release()
-                print str(self.name) + ' reporting!'
-                print 'Item ID: ' + str(item)
-                item_data = self.API.call('item', [item], True)  # Disable debugging
-                 
-            else:
-                self.exit = 1
-                self.mutex.release()
-            time.sleep(1)

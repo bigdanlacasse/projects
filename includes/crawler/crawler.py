@@ -9,10 +9,12 @@ from utils.manager import Manager
     Main processing
 """
 if __name__ == "__main__":
-    # @todo: check database connectivity    
     # Create manager (a.k.a Task Master) to do the majority of the work
     # @todo: Provide it a list of tasks which need to be done
-    taskmaster = Manager(100)
+    num_threads = 15
+    max_queue_size = 30000
+    
+    taskmaster = Manager(num_threads, max_queue_size)
     taskmaster.go() 
     
     
