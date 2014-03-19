@@ -1,0 +1,52 @@
+<html>
+    <head>
+    	{% block head %}
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="Dan LaCasse">
+        <title>{% block title %}Default Title{% endblock %}</title>
+        
+        {% block includes %}
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+        <script src="{{ url_for('static', filename='js/jquery-2.1.0.min.js') }}"></script>
+        {% endblock %}
+        {% endblock%}
+    </head>
+    <body>
+    	{% block nav %}
+		<div class="header" role="navigation">
+			<div class="container">
+				<ul class="nav nav-pills pull-right">
+					<li {% if not page or page == 'home' %}class="active"{% endif %}>
+						<a href="{{url_for('homepage')}}">Home</a>
+					</li>
+					<li {% if page == 'gw2items_browse' %}class="active"{% endif %}>
+						<a href="/items/browse">Guild Wars 2 Items</a>
+					</li>
+					<li {% if page == 'about' %}class="active"{% endif %}>
+						<a href="{{url_for('about')}}">About</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		{% endblock %}
+		<div id="content">
+			<div class="container">
+			{% block content %}{% endblock %}
+			</div>
+		</div>
+		{% block footer %}
+		<div class="container">	
+			<br />
+			<br />
+			<div class="footer">
+				<p>Page rendered by Flask</p>
+			</div>
+		</div>
+		{% endblock %}
+    </body>
+</html>		

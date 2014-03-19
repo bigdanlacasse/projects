@@ -3,7 +3,7 @@
 """
 from pymongo import MongoClient
 
-class DB (object):
+class DB(object):
     """
     Wrapper for MongoClient - get connection to specified collection
     """
