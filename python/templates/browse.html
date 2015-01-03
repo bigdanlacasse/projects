@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block title %}Home Page{% endblock %}
+{% block includes %}
+    {{ super() }}
+    <script src="{{ url_for('static', filename='js/browse.js') }}"></script>
+{% endblock %}
+{% block content %}
+	<div class="jumbotron">
+		<h2>Filters</h2>
+		<form method="get" action="/items/browse">
+			<span>Item Type:</span>
+			<select name="item_type" id="item_type">
+				<option value="" selected>Select One</option>
+				{{filters.type}}
+			</select>
+			&nbsp;&nbsp;
+			<span>Sub Type: </span>
+			<select name="sub_type" id="sub_type">
+				<option value="" selected></option>
+				{{filters.subtype}}
+			</select>
+			
+			<button class="button" type="submit">Submit</button> 
+			&nbsp;
+			<a class="" href="/items/browse">clear</a>
+		</form>
+	</div>
+	
+	{% if results %}
+		{% include 'results.html' %}
+	{% endif %}
+{% endblock %}

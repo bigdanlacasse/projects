@@ -1,6 +1,0 @@
-<?php
-class Items extends CI_Model {
-
-
-}
-?>
