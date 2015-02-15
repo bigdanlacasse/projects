@@ -15,6 +15,10 @@ app = Flask(__name__)
 def homepage():
     return render_template('home.html')
 
+@app.route('/sully')
+def sully_countdown():
+    return render_template('sully.html', page='sully')
+
 
 # Browse GW2 Items (show results)
 @app.route("/items/browse")
@@ -61,5 +65,6 @@ def hello(name=None, post_id=0):
     Run Application (on script run)
 """
 if __name__ == "__main__":
-    app.debug = True
-    app.run() #host='0.0.0.0'
+    #app.debug = True
+    app.add_url_rule('/favicon.ico', redirect_to=url_for('static', filename='img/favicon.ico'))
+    app.run(host='0.0.0.0') 

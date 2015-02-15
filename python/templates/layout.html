@@ -12,7 +12,10 @@
         <!-- Bootstrap core CSS -->
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+        <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
         <script src="{{ url_for('static', filename='js/jquery-2.1.0.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/moment.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/main.js') }}"></script>
         {% endblock %}
         {% endblock%}
     </head>
@@ -24,12 +27,19 @@
 					<li {% if not page or page == 'home' %}class="active"{% endif %}>
 						<a href="{{url_for('homepage')}}">Home</a>
 					</li>
+					<li {% if page == 'sully' %}class="active"{% endif %}>
+						<a href="/sully">Sully's Countdown</a>
+					</li>
+					{#
 					<li {% if page == 'gw2items_browse' %}class="active"{% endif %}>
 						<a href="/items/browse">Guild Wars 2 Items</a>
 					</li>
+					#}
+					{#
 					<li {% if page == 'about' %}class="active"{% endif %}>
 						<a href="{{url_for('about')}}">About</a>
 					</li>
+					#}
 				</ul>
 			</div>
 		</div>
@@ -44,7 +54,6 @@
 			<br />
 			<br />
 			<div class="footer">
-				<p>Page rendered by Flask</p>
 			</div>
 		</div>
 		{% endblock %}
