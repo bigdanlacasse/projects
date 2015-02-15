@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block title %}Sully's Countdown!!!!{% endblock %}
+{% block content %}
+	<div class="jumbotron">
+	    <p class="lead text-center">Sully arrives in <span id="count_down"></span></p>
+	</div>
+
+	<img src="{{ url_for('static', filename='img/puppy.gif') }}" class="img-thumbnail center-block img-responsive"></img>
+
+{% endblock %}
